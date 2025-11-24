@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
 const bookingRoutes = require("./routes/bookings");
+const partnerRoutes = require("./routes/partners");
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.get('/', (req, res) => res.send('ShuttleBook backend is running!'));
 // Mount API routes under /api
 app.use('/api/auth', authRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/partners", partnerRoutes);
 
 // Connect to MongoDB and start server
 mongoose
