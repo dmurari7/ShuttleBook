@@ -16,6 +16,11 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    const existing = await Booking.findOne({ date, courtNumber, timeSlot });
+    if (existing) {
+      return res.status(400).json({ message: "Court already booked for this time slot" });
+    }
+
     const booking = new Booking({
       user: req.user.id,
       courtNumber,
