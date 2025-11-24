@@ -16,6 +16,11 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    const timeSlotRegex = /^\d{1,2}-\d{1,2} (AM|PM)$/;
+    if (!timeSlotRegex.test(timeSlot)) {
+      return res.status(400).json({ message: "Invalid time slot format. Example: '7-8 PM'" });
+    }
+
     const existing = await Booking.findOne({ date, courtNumber, timeSlot });
     if (existing) {
       return res.status(400).json({ message: "Court already booked for this time slot" });
