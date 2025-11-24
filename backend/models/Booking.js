@@ -22,7 +22,8 @@ const bookingSchema = new mongoose.Schema(
     },
     timeSlot: {
       type: String, // "7-8 PM"
-      required: true
+      required: true,
+      match: [/^\d{1,2}-\d{1,2} (AM|PM)$/, "Invalid time slot format"]
     },
     partnerName: {
       type: String,
