@@ -21,22 +21,24 @@ export default function Signup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     await signup(form.username, form.email, form.password);
 
-    // If signup successful → user + token exist
-    const token = localStorage.getItem("token");
-    if (token) navigate("/dashboard");
+    if (localStorage.getItem("token")) navigate("/dashboard");
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4">
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-blue-100">
+        <h1 className="text-3xl font-bold text-center text-blue-700 mb-6">
+          Create Account
+        </h1>
+        <p className="text-center text-gray-600 mb-8">
+          Start booking shuttle rides in seconds.
+        </p>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <input
-            className="w-full border rounded-lg p-2"
+            className="w-full border border-gray-300 rounded-lg p-3 text-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             name="username"
             placeholder="Username"
             value={form.username}
@@ -45,9 +47,9 @@ export default function Signup() {
           />
 
           <input
-            className="w-full border rounded-lg p-2"
-            name="email"
+            className="w-full border border-gray-300 rounded-lg p-3 text-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             type="email"
+            name="email"
             placeholder="Email"
             value={form.email}
             onChange={handleChange}
@@ -55,9 +57,9 @@ export default function Signup() {
           />
 
           <input
-            className="w-full border rounded-lg p-2"
-            name="password"
+            className="w-full border border-gray-300 rounded-lg p-3 text-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             type="password"
+            name="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
@@ -67,17 +69,19 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-3 text-lg font-semibold rounded-xl hover:bg-blue-700 transition focus:ring-2 focus:ring-blue-300"
           >
             {loading ? "Creating account..." : "Sign Up"}
           </button>
 
-          {error && <p className="text-red-600 text-center">{error}</p>}
+          {error && (
+            <p className="text-red-600 text-center text-sm mt-2">{error}</p>
+          )}
         </form>
 
-        <p className="text-center mt-4 text-sm">
+        <p className="text-center mt-6 text-gray-700">
           Already have an account?{" "}
-          <Link className="text-blue-600" to="/login">
+          <Link className="text-blue-600 font-semibold hover:underline" to="/login">
             Log in
           </Link>
         </p>
