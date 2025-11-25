@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4">
+    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-blue-50 to-blue-100 p-4">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-blue-100">
         <h1 className="text-3xl font-bold text-center text-blue-700 mb-6">
           Welcome Back
