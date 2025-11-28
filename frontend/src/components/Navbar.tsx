@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl px-8 py-5 flex justify-between items-center border-b-4 border-blue-800">
+    <nav className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl px-8 py-5 flex justify-between items-center border-b-4 border-blue-800 sticky top-0 z-50">
       <Link to="/dashboard" className="font-bold text-4xl hover:scale-105 transition-transform duration-200 tracking-wide" style={{ color: 'white', fontFamily: "'Fredoka One', 'Arial Black', sans-serif" }}>
         ShuttleBook
       </Link>
