@@ -16,7 +16,7 @@ export default function Bookings() {
       setLoading(true);
       setError(null);
       const res = await getBookings();
-      setBookings(res.data);
+      setBookings(res.data.bookings || []);
     } catch (err) {
       console.error("Error loading bookings:", err);
       setError("Failed to load bookings");
@@ -31,14 +31,12 @@ export default function Bookings() {
     }
     try {
       await deleteBooking(id);
-      load(); // refresh
+      await load(); // refresh
     } catch (err) {
       console.error("Error deleting booking:", err);
       alert("Failed to delete booking");
     }
   }
-
-  console.log("Bookings state:", { loading, error, bookingsCount: bookings.length, bookings });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 p-8">
