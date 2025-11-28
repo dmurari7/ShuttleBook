@@ -24,30 +24,44 @@ export default function Dashboard() {
   const nextBooking = bookings[0];
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4 text-blue-700">Dashboard</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 p-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-5xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+          Dashboard
+        </h1>
 
-      {!nextBooking && (
-        <p className="text-gray-600">You have no upcoming bookings.</p>
-      )}
+        {!nextBooking && (
+          <div className="bg-white rounded-3xl shadow-xl p-8 border-2 border-blue-200 text-center">
+            <p className="text-gray-600 text-lg">You have no upcoming bookings.</p>
+            <p className="text-gray-500 mt-2">Book a court to get started!</p>
+          </div>
+        )}
 
-      {nextBooking && (
-        <div className="bg-blue-100 border border-blue-300 rounded-xl shadow p-4">
-          <h2 className="text-xl font-semibold text-blue-800 mb-2">Next Booking</h2>
-          <p className="text-blue-700 text-lg">
-            {new Date(nextBooking.date).toLocaleDateString()}
-          </p>
-          <p className="text-blue-600">{nextBooking.timeSlot}</p>
-          <p className="text-blue-600">Court {nextBooking.courtNumber}</p>
-          <p className="text-blue-600">Location: {nextBooking.location}</p>
-          {nextBooking.partnerName && (
-            <p className="text-blue-500 italic">
-              Partner: {nextBooking.partnerName}
-            </p>
-          )}
-        </div>
-      )}
+        {nextBooking && (
+          <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl shadow-2xl p-8 border-2 border-blue-800 relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-40 h-40 bg-blue-400 rounded-full -mr-20 -mt-20 opacity-30"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-600 rounded-full -ml-16 -mb-16 opacity-30"></div>
+            
+            <h2 className="text-3xl font-bold text-white mb-6 relative z-10">Next Booking</h2>
+            <div className="space-y-3 relative z-10">
+              <p className="text-white text-2xl font-semibold">
+                {new Date(nextBooking.date).toLocaleDateString()}
+              </p>
+              <p className="text-blue-100 text-xl font-medium">{nextBooking.timeSlot}</p>
+              <p className="text-blue-100 text-xl font-medium">Court {nextBooking.courtNumber}</p>
+              <p className="text-blue-100 text-xl font-medium">Location: {nextBooking.location}</p>
+              {nextBooking.partnerName && (
+                <div className="mt-4 pt-4 border-t-2 border-blue-400">
+                  <p className="text-blue-50 text-lg font-medium">
+                    Partner: {nextBooking.partnerName}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-

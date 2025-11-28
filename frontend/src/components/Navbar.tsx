@@ -12,27 +12,27 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg px-6 py-4 flex justify-between items-center">
-      <Link to="/dashboard" className="font-bold text-2xl">
+    <nav className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl px-8 py-5 flex justify-between items-center border-b-4 border-blue-800">
+      <Link to="/dashboard" className="font-bold text-4xl hover:scale-105 transition-transform duration-200 tracking-wide" style={{ color: 'white', fontFamily: "'Fredoka One', 'Arial Black', sans-serif" }}>
         ShuttleBook
       </Link>
-      <div className="space-x-4 flex items-center">
-        <Link className="hover:text-blue-200 transition-colors" to="/dashboard">
+      <div className="space-x-6 flex items-center">
+        <Link className="px-3 py-2 rounded-lg font-semibold transition-all hover:bg-blue-800" style={{ color: 'white' }} to="/dashboard">
           Dashboard
         </Link>
-        <Link className="hover:text-blue-200 transition-colors" to="/bookings">
+        <Link className="px-3 py-2 rounded-lg font-semibold transition-all hover:bg-blue-800" style={{ color: 'white' }} to="/bookings">
           Bookings
         </Link>
-        <Link className="hover:text-blue-200 transition-colors" to="/bookings/create">
+        <Link className="px-3 py-2 rounded-lg font-semibold transition-all hover:bg-blue-800" style={{ color: 'white' }} to="/bookings/create">
           Create Booking
         </Link>
-        <Link className="hover:text-blue-200 transition-colors" to="/partners">
+        <Link className="px-3 py-2 rounded-lg font-semibold transition-all hover:bg-blue-800" style={{ color: 'white' }} to="/partners">
           Partner Requests
         </Link>
-        <span className="px-2 py-1 rounded-lg bg-blue-800">{user?.username}</span>
+        <span className="px-4 py-2 rounded-xl bg-blue-800 font-bold shadow-lg border-2 border-blue-900 text-white">{user?.username}</span>
         <button
           onClick={handleLogout}
-          className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded-lg text-white transition-colors"
+          className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 px-5 py-2 rounded-xl text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           Logout
         </button>
