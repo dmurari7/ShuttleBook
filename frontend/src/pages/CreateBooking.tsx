@@ -81,6 +81,19 @@ export default function CreateBooking() {
             className="w-full mt-2 p-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all outline-none text-base"
           >
             <option value="">Select a time</option>
+            <option>5-6 AM</option>
+            <option>6-7 AM</option>
+            <option>7-8 AM</option>
+            <option>8-9 AM</option>
+            <option>9-10 AM</option>
+            <option>10-11 AM</option>
+            <option>11-12 PM</option>
+            <option>1-2 PM</option>
+            <option>2-3 PM</option>
+            <option>3-4 PM</option>
+            <option>4-5 PM</option>
+            <option>5-6 PM</option>
+            <option>6-7 PM</option>
             <option>7-8 PM</option>
             <option>8-9 PM</option>
             <option>9-10 PM</option>
