@@ -2,13 +2,14 @@
 interface BookingCardProps {
   booking: any;
   onDelete: (id: string) => void;
+  onUpdate: (id: string, data: any) => void;
 }
 
-export default function BookingCard({ booking, onDelete }: BookingCardProps) {
+export default function BookingCard({ booking, onDelete, onUpdate }: BookingCardProps) {
   const date = new Date(booking.date).toLocaleDateString();
 
   return (
-    <div className="bg-white shadow-xl rounded-2xl p-6 border-2 border-blue-200 flex justify-between items-center hover:shadow-2xl hover:border-blue-300 transition-all duration-200 relative overflow-hidden group">
+    <div className="bg-white shadow-xl rounded-2xl p-6 border-2 border-blue-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-200 relative overflow-hidden group">
       {/* Decorative gradient on hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
       
@@ -18,18 +19,26 @@ export default function BookingCard({ booking, onDelete }: BookingCardProps) {
         <p className="text-gray-700 text-lg font-medium">Court {booking.courtNumber}</p>
         <p className="text-gray-700 text-lg font-medium">Location: {booking.location}</p>
         {booking.partnerName && (
-          <div className="mt-3 pt-3 border-t-2 border-blue-100">
+          <div className="mt-3 pt-3 border-t-2 border-blue-100 mb-4">
             <p className="text-blue-600 font-medium text-lg">Partner: {booking.partnerName}</p>
           </div>
         )}
       </div>
 
-      <button
-        onClick={() => onDelete(booking._id)}
-        className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 relative z-10"
-      >
-        Delete
-      </button>
+      <div className="flex gap-3 relative z-10 mt-4">
+        <button
+          onClick={() => onUpdate(booking._id, booking)}
+          className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => onDelete(booking._id)}
+          className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
