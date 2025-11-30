@@ -99,4 +99,19 @@ router.get('/me', authMiddleware, async (req, res) => {
   return res.json({ user: req.user });
 });
 
+/**
+ * GET /api/auth/all-users
+ * Returns all users (without passwords)
+ * headers: Authorization: Bearer <token>
+ */
+router.get('/all-users', authMiddleware, async (req, res) => {
+  try {
+    const users = await User.find({}, { password: 0 }); // Exclude password field
+    return res.json(users);
+  } catch (err) {
+    console.error('Error fetching users', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
