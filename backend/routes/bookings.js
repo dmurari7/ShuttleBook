@@ -21,6 +21,15 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Invalid time slot format. Example: '7-8 PM'" });
     }
 
+    // Check if date is in the past
+    const bookingDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
+    
+    if (bookingDate < today) {
+      return res.status(400).json({ message: "Cannot create bookings in the past" });
+    }
+
     const existing = await Booking.findOne({ date, courtNumber, timeSlot });
     if (existing) {
       return res.status(400).json({ message: "Court already booked for this time slot" });
@@ -73,6 +82,17 @@ router.put("/:id", authMiddleware, async (req, res) => {
 
     if (booking.user.toString() !== req.user.id) {
       return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    // If updating the date, check if it's in the past
+    if (req.body.date) {
+      const bookingDate = new Date(req.body.date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (bookingDate < today) {
+        return res.status(400).json({ message: "Cannot update booking to a past date" });
+      }
     }
 
     const updates = req.body;

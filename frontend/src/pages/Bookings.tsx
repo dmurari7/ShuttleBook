@@ -150,6 +150,7 @@ export default function Bookings() {
                     name="date"
                     value={editForm.date}
                     onChange={handleEditFormChange}
+                    min={new Date().toISOString().split('T')[0]}
                     className="w-full mt-2 p-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all outline-none text-base"
                     required
                   />
