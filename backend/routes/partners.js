@@ -100,13 +100,13 @@ router.get("/outgoing", authMiddleware, async (req, res) => {
 // --------------------------------------------------
 router.put("/:id/respond", authMiddleware, async (req, res) => {
   try {
-    const { action } = req.body; // accept or reject
+    const { action } = req.body; // accepted or rejected
 
     if (!["accepted", "rejected"].includes(action)) {
       return res.status(400).json({ message: "Invalid action" });
     }
 
-    const request = await PartnerRequest.findById(req.params.id);
+    const request = await PartnerRequest.findById(req.params.id).populate("booking");
     if (!request) return res.status(404).json({ message: "Request not found" });
 
     // Only recipient can accept/reject
@@ -116,6 +116,17 @@ router.put("/:id/respond", authMiddleware, async (req, res) => {
 
     request.status = action;
     await request.save();
+
+    // If accepted, update the booking's partnerName with the accepting user's username
+    if (action === "accepted") {
+      const acceptingUser = await User.findById(req.user.id);
+      const booking = await Booking.findById(request.booking._id);
+      
+      if (booking && acceptingUser) {
+        booking.partnerName = acceptingUser.username;
+        await booking.save();
+      }
+    }
 
     res.json({ message: `Request ${action}`, request });
   } catch (err) {

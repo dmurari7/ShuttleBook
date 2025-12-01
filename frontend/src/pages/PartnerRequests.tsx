@@ -19,8 +19,11 @@ export default function PartnerRequests() {
         getIncomingRequests(),
         getOutgoingRequests(),
       ]);
-      // Handle data structure - adjust based on your API response
-      setIncoming(incRes.data.requests || incRes.data || []);
+      // Filter incoming to only show pending requests
+      const incomingRequests = incRes.data.requests || incRes.data || [];
+      const pendingIncoming = incomingRequests.filter((r: any) => r.status === "pending");
+      
+      setIncoming(pendingIncoming);
       setOutgoing(outRes.data.requests || outRes.data || []);
     } catch (err) {
       console.error(err);
@@ -32,7 +35,8 @@ export default function PartnerRequests() {
   async function handleRespond(requestId: string, action: "accepted" | "rejected") {
     try {
       await respondToRequest(requestId, action);
-      load();
+      // Reload the requests to reflect the changes
+      await load();
     } catch (err) {
       console.error(err);
       alert("Failed to respond to request");
