@@ -98,6 +98,7 @@ export default function CreateBooking() {
             name="courtNumber"
             value={form.courtNumber}
             onChange={update}
+            min="1"
             className="w-full mt-2 p-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all outline-none text-base"
           />
         </label>

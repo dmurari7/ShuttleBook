@@ -16,6 +16,11 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    // Validate court number
+    if (courtNumber < 1) {
+      return res.status(400).json({ message: "Court number must be a positive number" });
+    }
+
     const timeSlotRegex = /^\d{1,2}-\d{1,2} (AM|PM)$/;
     if (!timeSlotRegex.test(timeSlot)) {
       return res.status(400).json({ message: "Invalid time slot format. Example: '7-8 PM'" });

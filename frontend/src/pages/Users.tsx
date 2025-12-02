@@ -44,7 +44,10 @@ export default function Users() {
         setLoading(true);
         const res = await getBookings();
         // Handle data structure - backend returns { bookings: [...] }
-        setBookings(res.data.bookings || res.data || []);
+        const allBookings = res.data.bookings || res.data || [];
+        // Filter out bookings that already have a partner
+        const availableBookings = allBookings.filter((b: any) => !b.partnerName || b.partnerName === "");
+        setBookings(availableBookings);
       } catch (err) {
         console.error("Error loading bookings:", err);
       } finally {
