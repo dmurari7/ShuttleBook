@@ -16,7 +16,6 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Validate court number
     if (courtNumber < 1) {
       return res.status(400).json({ message: "Court number must be a positive number" });
     }
@@ -29,7 +28,7 @@ router.post("/", authMiddleware, async (req, res) => {
     // Check if date is in the past
     const bookingDate = new Date(date);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
+    today.setHours(0, 0, 0, 0); 
     
     if (bookingDate < today) {
       return res.status(400).json({ message: "Cannot create bookings in the past" });

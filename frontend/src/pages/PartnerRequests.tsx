@@ -19,7 +19,7 @@ export default function PartnerRequests() {
         getIncomingRequests(),
         getOutgoingRequests(),
       ]);
-      // Filter incoming to only show pending requests
+      
       const incomingRequests = incRes.data.requests || incRes.data || [];
       const pendingIncoming = incomingRequests.filter((r: any) => r.status === "pending");
       
@@ -35,7 +35,7 @@ export default function PartnerRequests() {
   async function handleRespond(requestId: string, action: "accepted" | "rejected") {
     try {
       await respondToRequest(requestId, action);
-      // Reload the requests to reflect the changes
+      
       await load();
     } catch (err) {
       console.error(err);

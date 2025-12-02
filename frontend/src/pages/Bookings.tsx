@@ -27,7 +27,7 @@ export default function Bookings() {
       const res = await getBookings();
       console.log("API Response:", res);
       console.log("Bookings data:", res.data);
-      // Backend returns { bookings: [...] }, not just [...]
+      
       setBookings(res.data.bookings || []);
     } catch (err) {
       console.error("Error loading bookings:", err);
@@ -43,7 +43,7 @@ export default function Bookings() {
     }
     try {
       await deleteBooking(id);
-      await load(); // refresh
+      await load(); 
     } catch (err) {
       console.error("Error deleting booking:", err);
       alert("Failed to delete booking");
@@ -76,7 +76,7 @@ export default function Bookings() {
         partnerName: editForm.partnerName || undefined,
       });
       setEditingBooking(null);
-      await load(); // refresh
+      await load(); 
     } catch (err: any) {
       console.error("Error updating booking:", err);
       alert(err?.response?.data?.message || "Failed to update booking");

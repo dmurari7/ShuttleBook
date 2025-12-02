@@ -58,7 +58,6 @@ router.post('/signup', async (req, res) => {
     });
   } catch (err) {
     console.error('Signup error', err);
-    // E11000 duplicate key error -> uniqueness collision
     if (err.code === 11000) {
       return res.status(409).json({ message: 'Email already exists' });
     }
@@ -95,7 +94,6 @@ router.post('/login', async (req, res) => {
  * headers: Authorization: Bearer <token>
  */
 router.get('/me', authMiddleware, async (req, res) => {
-  // authMiddleware already attached req.user (without password)
   return res.json({ user: req.user });
 });
 
@@ -106,7 +104,7 @@ router.get('/me', authMiddleware, async (req, res) => {
  */
 router.get('/all-users', authMiddleware, async (req, res) => {
   try {
-    const users = await User.find({}, { password: 0 }); // Exclude password field
+    const users = await User.find({}, { password: 0 });
     return res.json(users);
   } catch (err) {
     console.error('Error fetching users', err);

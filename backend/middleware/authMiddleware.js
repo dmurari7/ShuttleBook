@@ -20,7 +20,7 @@ async function authMiddleware(req, res, next) {
       return res.status(401).json({ message: 'Invalid token: user not found' });
     }
 
-    req.user = user; // accessible in route handlers
+    req.user = user;
     next();
   } catch (err) {
     console.error('Auth error', err);

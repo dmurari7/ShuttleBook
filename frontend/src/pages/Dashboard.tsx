@@ -12,7 +12,6 @@ export default function Dashboard() {
   async function load() {
     try {
       const res = await getBookings();
-      // Backend returns { bookings: [...] }, not just [...]
       const sorted = (res.data.bookings || []).sort(
         (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
       );

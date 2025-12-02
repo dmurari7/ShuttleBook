@@ -100,7 +100,7 @@ router.get("/outgoing", authMiddleware, async (req, res) => {
 // --------------------------------------------------
 router.put("/:id/respond", authMiddleware, async (req, res) => {
   try {
-    const { action } = req.body; // accepted or rejected
+    const { action } = req.body;
 
     if (!["accepted", "rejected"].includes(action)) {
       return res.status(400).json({ message: "Invalid action" });
